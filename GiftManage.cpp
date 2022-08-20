@@ -6,274 +6,274 @@
 
 GiftManage::GiftManage()
 {
-	ifstream fin(GIFTFILE, ios::in);//´ò¿ªÀñÆ·ĞÅÏ¢ÎÄ¼ş
+	ifstream fin(GIFTFILE, ios::in);//æ‰“å¼€ç¤¼å“ä¿¡æ¯æ–‡ä»¶
 
-	if (!fin.is_open())//ÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ
+	if (!fin.is_open())//åˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 	{
-		cout << "ÀñÆ·ĞÅÏ¢ÎÄ¼ş²»´æÔÚ" << endl;
+		cout << "ç¤¼å“ä¿¡æ¯æ–‡ä»¶ä¸å­˜åœ¨" << endl;
 	}
 	else
 	{
 		char ch;
-		fin >> ch;//¶ÁÈëµ¥¸ö×Ö·û
+		fin >> ch;//è¯»å…¥å•ä¸ªå­—ç¬¦
 
-		if (!fin.eof())//ÅĞ¶ÏÎÄ¼şÊÇ·ñÎª¿Õ
+		if (!fin.eof())//åˆ¤æ–­æ–‡ä»¶æ˜¯å¦ä¸ºç©º
 		{
-			int GiftSize = getGiftSize();//»ñÈ¡Êı¾İµÄÊıÁ¿
-			gift = vector<Gift>(GiftSize);//³õÊ¼»¯vector<Gift>
-			GiftInit();//¶ÁÈ¡ÎÄ¼şÊı¾İ
+			int GiftSize = getGiftSize();//è·å–æ•°æ®çš„æ•°é‡
+			gift = vector<Gift>(GiftSize);//åˆå§‹åŒ–vector<Gift>
+			GiftInit();//è¯»å–æ–‡ä»¶æ•°æ®
 		}
 		else
 		{
-			cout << "ÀñÆ·ĞÅÏ¢ÎÄ¼şÎª¿Õ" << endl;
+			cout << "ç¤¼å“ä¿¡æ¯æ–‡ä»¶ä¸ºç©º" << endl;
 		}
 	}
 	
-	fin.close();//¹Ø±ÕÎÄ¼ş
+	fin.close();//å…³é—­æ–‡ä»¶
 	
 	/*******************************************/
-	fin.open(BUYERFILE, ios::in);//´ò¿ª¹Ë¿ÍĞÅÏ¢ÎÄ¼ş
+	fin.open(BUYERFILE, ios::in);//æ‰“å¼€é¡¾å®¢ä¿¡æ¯æ–‡ä»¶
 
-	if (!fin.is_open())//ÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ
+	if (!fin.is_open())//åˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 	{
-		cout << "¹Ë¿ÍĞÅÏ¢ÎÄ¼ş²»´æÔÚ" << endl;
+		cout << "é¡¾å®¢ä¿¡æ¯æ–‡ä»¶ä¸å­˜åœ¨" << endl;
 	}
 	else
 	{
 		char ch;
 		fin >> ch;
 
-		if (!fin.eof())//ÅĞ¶ÏÎÄ¼şÊÇ·ñÎª¿Õ
+		if (!fin.eof())//åˆ¤æ–­æ–‡ä»¶æ˜¯å¦ä¸ºç©º
 		{
-			int BuyerSize = getBuyerSize();//»ñÈ¡³¤¶È
-			buyer = vector<Buyer>(BuyerSize);//³õÊ¼»¯¹Ë¿Í
-			BuyerInit();//¶ÁÈ¡¹Ë¿ÍÎÄ¼ş
+			int BuyerSize = getBuyerSize();//è·å–é•¿åº¦
+			buyer = vector<Buyer>(BuyerSize);//åˆå§‹åŒ–é¡¾å®¢
+			BuyerInit();//è¯»å–é¡¾å®¢æ–‡ä»¶
 		}
 		else
 		{
-			cout << "¹Ë¿ÍÎÄ¼şÎª¿Õ" << endl;
+			cout << "é¡¾å®¢æ–‡ä»¶ä¸ºç©º" << endl;
 		}
 	}
 	
-	fin.close();//¹Ø±ÕÎÄ¼ş
+	fin.close();//å…³é—­æ–‡ä»¶
 
 	/*******************************************/
-	fin.open(SALERECORDSFILE, ios::in);//´ò¿ª¹Ë¿ÍÏúÊÛ¼ÇÂ¼ÎÄ¼ş
+	fin.open(SALERECORDSFILE, ios::in);//æ‰“å¼€é¡¾å®¢é”€å”®è®°å½•æ–‡ä»¶
 
-	if (!fin.is_open())//ÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ
+	if (!fin.is_open())//åˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 	{
-		cout << "ÏúÊÛ¼ÇÂ¼ÎÄ¼ş²»´æÔÚ" << endl;
+		cout << "é”€å”®è®°å½•æ–‡ä»¶ä¸å­˜åœ¨" << endl;
 	}
 	else
 	{
 		char ch;
 		fin >> ch;
-		if (!fin.eof())//ÅĞ¶ÏÎÄ¼şÊÇ·ñÎª¿Õ
+		if (!fin.eof())//åˆ¤æ–­æ–‡ä»¶æ˜¯å¦ä¸ºç©º
 		{
-			int saleRecordsSize = getSaleRecordsSize();//»ñÈ¡³¤¶È
-			saleRecords = vector<SaleRecords>(saleRecordsSize);//³õÊ¼»¯³¤¶È
-			SaleRecordsInit();//»ñÈ¡ÏúÊÛ¼ÇÂ¼µÄÄÚÈİ
+			int saleRecordsSize = getSaleRecordsSize();//è·å–é•¿åº¦
+			saleRecords = vector<SaleRecords>(saleRecordsSize);//åˆå§‹åŒ–é•¿åº¦
+			SaleRecordsInit();//è·å–é”€å”®è®°å½•çš„å†…å®¹
 		}
 		else
 		{
-			cout << "ÏúÊÛ¼ÇÂ¼ÎÄ¼şÎª¿Õ" << endl;
+			cout << "é”€å”®è®°å½•æ–‡ä»¶ä¸ºç©º" << endl;
 		}
 	}
 
-	fin.close();//¹Ø±ÕÎÄ¼ş
+	fin.close();//å…³é—­æ–‡ä»¶
 }
 
 GiftManage::~GiftManage()
 {
-	save();//½«Êı¾İ´æÈëÎÄ¼şÖĞ£¬ÊµÏÖ¿É³Ö¾Ã»¯
-	gift.clear();//Çå¿ÕÀñÆ·ĞÅÏ¢
-	buyer.clear();//Çå¿Õ¹Ë¿ÍĞÅÏ¢
-	saleRecords.clear();//Çå¿ÕÏúÊÛ¼ÇÂ¼
+	save();//å°†æ•°æ®å­˜å…¥æ–‡ä»¶ä¸­ï¼Œå®ç°å¯æŒä¹…åŒ–
+	gift.clear();//æ¸…ç©ºç¤¼å“ä¿¡æ¯
+	buyer.clear();//æ¸…ç©ºé¡¾å®¢ä¿¡æ¯
+	saleRecords.clear();//æ¸…ç©ºé”€å”®è®°å½•
 }
 
 void GiftManage::save()
 {
-	if (gift.size())//Èç¹û³¤¶È²»Îª0£¬¼´ÓĞÊı¾İ²Å±£´æ
+	if (gift.size())//å¦‚æœé•¿åº¦ä¸ä¸º0ï¼Œå³æœ‰æ•°æ®æ‰ä¿å­˜
 	{
-		ofstream fout(GIFTFILE, ios::out);//´ò¿ªÀñÆ·ÎÄ¼ş½øĞĞÊä³ö
+		ofstream fout(GIFTFILE, ios::out);//æ‰“å¼€ç¤¼å“æ–‡ä»¶è¿›è¡Œè¾“å‡º
 
-		fout.setf(ios::left);//Êä³ö¶¼±£³Ö15¸ö×Ö·û²¢ÇÒ¿¿×ó
-		//Êä³öÌáÊ¾ĞÅÏ¢£¬·½±ãÓÃ»§²é¿´
-		fout << setw(15) << "ÀñÆ·±àºÅ" << setw(15) << "ÀñÆ·Ãû³Æ" << setw(15) <<
-			"½ø¼Û³É±¾" << setw(15) << "ÊÛÂô¼Û¸ñ" << setw(15) << "²úÆ·ÊıÁ¿" << endl;
+		fout.setf(ios::left);//è¾“å‡ºéƒ½ä¿æŒ15ä¸ªå­—ç¬¦å¹¶ä¸”é å·¦
+		//è¾“å‡ºæç¤ºä¿¡æ¯ï¼Œæ–¹ä¾¿ç”¨æˆ·æŸ¥çœ‹
+		fout << setw(15) << "ç¤¼å“ç¼–å·" << setw(15) << "ç¤¼å“åç§°" << setw(15) <<
+			"è¿›ä»·æˆæœ¬" << setw(15) << "å”®å–ä»·æ ¼" << setw(15) << "äº§å“æ•°é‡" << endl;
 
-		//Êä³öËùÓĞÀñÆ·µÄĞÅÏ¢£¬ÀñÆ·ĞÅÏ¢°´ÕÕÁÙÆ¸±àºÅ×ÖµäĞòÅÅĞò
+		//è¾“å‡ºæ‰€æœ‰ç¤¼å“çš„ä¿¡æ¯ï¼Œç¤¼å“ä¿¡æ¯æŒ‰ç…§ä¸´è˜ç¼–å·å­—å…¸åºæ’åº
 		for (int i = 0; i < gift.size(); i++)
 			fout << gift[i] << endl;
 		
-		//È¡ÏûÊä³ö¿¿×óµÄÉè¶¨
+		//å–æ¶ˆè¾“å‡ºé å·¦çš„è®¾å®š
 		cout.unsetf(ios::left);
-		fout.close();//¹Ø±ÕÎÄ¼ş
+		fout.close();//å…³é—­æ–‡ä»¶
 	}
 
 	/*******************************************/
 
-	if (buyer.size())//Èç¹û³¤¶È²»Îª0£¬¼´ÓĞÊı¾İ²Å±£´æ
+	if (buyer.size())//å¦‚æœé•¿åº¦ä¸ä¸º0ï¼Œå³æœ‰æ•°æ®æ‰ä¿å­˜
 	{
-		ofstream fout(BUYERFILE, ios::out); ///´ò¿ªÀñÆ·¹Ë¿Í½øĞĞÊä³ö
+		ofstream fout(BUYERFILE, ios::out); ///æ‰“å¼€ç¤¼å“é¡¾å®¢è¿›è¡Œè¾“å‡º
 
 		fout.setf(ios::left);
-		//Êä³ö¹Ë¿ÍµÄĞÅÏ¢ÌáÊ¾£¬·½±ã²é¿´
-		fout << setw(15) << "ĞÕÃû" << setw(15) << "µç»°ºÅÂë" <<
-			setw(15) << "ÊÇ»áÔ±Âğ" << setw(15) << "Ïû·Ñ½ğ¶î" << endl;
+		//è¾“å‡ºé¡¾å®¢çš„ä¿¡æ¯æç¤ºï¼Œæ–¹ä¾¿æŸ¥çœ‹
+		fout << setw(15) << "å§“å" << setw(15) << "ç”µè¯å·ç " <<
+			setw(15) << "æ˜¯ä¼šå‘˜å—" << setw(15) << "æ¶ˆè´¹é‡‘é¢" << endl;
 
-		//Êä³öÓÃ»§µÄĞÅÏ¢£¬¹Ë¿ÍĞÅÏ¢°´ÕÕÃû×Ö×ÖµäĞòÅÅĞò
+		//è¾“å‡ºç”¨æˆ·çš„ä¿¡æ¯ï¼Œé¡¾å®¢ä¿¡æ¯æŒ‰ç…§åå­—å­—å…¸åºæ’åº
 		for (int i = 0; i < buyer.size(); i++)
 			fout << buyer[i] << endl;
 		
-		//È¡ÏûÊä³ö¿¿×óµÄÉè¶¨
+		//å–æ¶ˆè¾“å‡ºé å·¦çš„è®¾å®š
 		cout.unsetf(ios::left);
-		fout.close();//¹Ø±ÕÎÄ¼ş
+		fout.close();//å…³é—­æ–‡ä»¶
 	}
 
 	/*******************************************/
 
-	if (saleRecords.size())//Èç¹û³¤¶È²»Îª0£¬¼´ÓĞÊı¾İ²Å±£´æ
+	if (saleRecords.size())//å¦‚æœé•¿åº¦ä¸ä¸º0ï¼Œå³æœ‰æ•°æ®æ‰ä¿å­˜
 	{
-		ofstream fout(SALERECORDSFILE, ios::out); // ´ò¿ªÏúÊÛ¼ÇÂ¼½øĞĞÊä³ö
+		ofstream fout(SALERECORDSFILE, ios::out); // æ‰“å¼€é”€å”®è®°å½•è¿›è¡Œè¾“å‡º
 
 		fout.setf(ios::left);
-		//Êä³öÏúÊÛ¼ÇÂ¼µÄÌáÊ¾ĞÅÏ¢£¬·½±ã²é¿´
-		fout << setw(15) << "ĞÕÃû" << setw(15) << "µç»°ºÅÂë" << setw(15) << "ÀñÆ·Ãû³Æ"
-			<< setw(15) << "ÀñÆ·±àºÅ" << setw(15) << "ÀñÆ·³É±¾" << setw(15) << "ÀñÆ·ÊÛ¼Û" 
-			<< setw(15) << "Êµ¼ÊÊÛ¼Û" << setw(15) << "¹ºÂòÊıÁ¿" << setw(15) << "¹ºÂòÈÕÆÚ" << endl;
+		//è¾“å‡ºé”€å”®è®°å½•çš„æç¤ºä¿¡æ¯ï¼Œæ–¹ä¾¿æŸ¥çœ‹
+		fout << setw(15) << "å§“å" << setw(15) << "ç”µè¯å·ç " << setw(15) << "ç¤¼å“åç§°"
+			<< setw(15) << "ç¤¼å“ç¼–å·" << setw(15) << "ç¤¼å“æˆæœ¬" << setw(15) << "ç¤¼å“å”®ä»·" 
+			<< setw(15) << "å®é™…å”®ä»·" << setw(15) << "è´­ä¹°æ•°é‡" << setw(15) << "è´­ä¹°æ—¥æœŸ" << endl;
 
-		//Êä³öÏúÊÛ¼ÇÂ¼
+		//è¾“å‡ºé”€å”®è®°å½•
 		for (int i = 0; i < saleRecords.size(); i++)
 			fout << saleRecords[i] << endl;
 		
-		//È¡ÏûÊä³ö¿¿×óµÄÉè¶¨
+		//å–æ¶ˆè¾“å‡ºé å·¦çš„è®¾å®š
 		cout.unsetf(ios::left);
 		fout.close();
 	}
 }
 
 int GiftManage::getGiftSize()
-{//»ñÈ¡ÀñÆ·ĞÅÏ¢µÄ³¤¶È
-	ifstream fin(GIFTFILE, ios::in);//´ò¿ªÀñÆ·ÎÄ¼ş
+{//è·å–ç¤¼å“ä¿¡æ¯çš„é•¿åº¦
+	ifstream fin(GIFTFILE, ios::in);//æ‰“å¼€ç¤¼å“æ–‡ä»¶
 
 	string s;
-	getline(fin, s);//½«µÚÒ»ĞĞµÄÌáÊ¾ĞÅÏ¢³Ôµô
-	int Size = 0;//ÎÄ¼şÖĞÊı¾İµÄ³¤¶È
-	while (getline(fin, s)) Size++;//Ò»ĞĞÒ»ĞĞµÄ¶ÁÈ¡¼ÇÂ¼£¬¼ÇÂ¼³¤¶È
+	getline(fin, s);//å°†ç¬¬ä¸€è¡Œçš„æç¤ºä¿¡æ¯åƒæ‰
+	int Size = 0;//æ–‡ä»¶ä¸­æ•°æ®çš„é•¿åº¦
+	while (getline(fin, s)) Size++;//ä¸€è¡Œä¸€è¡Œçš„è¯»å–è®°å½•ï¼Œè®°å½•é•¿åº¦
 
-	fin.close();//¹Ø±ÕÎÄ¼ş
+	fin.close();//å…³é—­æ–‡ä»¶
 	return Size;
 }
 
 void GiftManage::GiftInit()
-{//³õÊ¼»¯ÀñÆ·ĞÅÏ¢£¬½«ÎÄ¼şµÄĞÅÏ¢·ÅÈë³ÌĞòÖĞ
-	ifstream fin(GIFTFILE, ios::in);//´ò¿ªÀñÆ·ÎÄ¼ş
+{//åˆå§‹åŒ–ç¤¼å“ä¿¡æ¯ï¼Œå°†æ–‡ä»¶çš„ä¿¡æ¯æ”¾å…¥ç¨‹åºä¸­
+	ifstream fin(GIFTFILE, ios::in);//æ‰“å¼€ç¤¼å“æ–‡ä»¶
 
-	string number;//ÀñÆ·±àºÅ
-	string name;//ÀñÆ·Ãû³Æ
-	double cost;//½ø¼Û³É±¾
-	double price;//ÊÛÂô¼Û¸ñ
-	int amount;//²úÆ·ÊıÁ¿
-	getline(fin, number);//ÍÌµôµÚÒ»ĞĞµÄĞÅÏ¢
+	string number;//ç¤¼å“ç¼–å·
+	string name;//ç¤¼å“åç§°
+	double cost;//è¿›ä»·æˆæœ¬
+	double price;//å”®å–ä»·æ ¼
+	int amount;//äº§å“æ•°é‡
+	getline(fin, number);//åæ‰ç¬¬ä¸€è¡Œçš„ä¿¡æ¯
 	for (int i = 0; i < gift.size(); i++)
-	{//½«ÎÄ¼şÊı¾İ°¤¸öÊäÈë
+	{//å°†æ–‡ä»¶æ•°æ®æŒ¨ä¸ªè¾“å…¥
 		fin >> number >> name >> cost >> price >> amount;
 		gift[i] = Gift(number, name, cost, price, amount);
 	}
 
-	fin.close();//¹Ø±ÕÎÄ¼ş
+	fin.close();//å…³é—­æ–‡ä»¶
 }
 
 int GiftManage::getBuyerSize()
-{//»ñÈ¡¹Ë¿ÍµÄÎÄ¼ş³¤¶È
-	ifstream fin(BUYERFILE, ios::in);//´ò¿ª¹Ë¿ÍÎÄ¼ş
+{//è·å–é¡¾å®¢çš„æ–‡ä»¶é•¿åº¦
+	ifstream fin(BUYERFILE, ios::in);//æ‰“å¼€é¡¾å®¢æ–‡ä»¶
 	
 	string s;
-	getline(fin, s);//½«µÚÒ»ĞĞÌáÊ¾ĞÅÏ¢³Ôµô
+	getline(fin, s);//å°†ç¬¬ä¸€è¡Œæç¤ºä¿¡æ¯åƒæ‰
 	int Size = 0;
-	while (getline(fin, s)) Size++;//Ò»ĞĞÒ»ĞĞµÄ¶ÁÈ¡£¬»ñÈ¡³¤¶È
+	while (getline(fin, s)) Size++;//ä¸€è¡Œä¸€è¡Œçš„è¯»å–ï¼Œè·å–é•¿åº¦
 
-	fin.close();//¹Ø±ÕÎÄ¼ş
+	fin.close();//å…³é—­æ–‡ä»¶
 	return Size;
 }
 
 void GiftManage::BuyerInit()
-{//³õÊ¼»¯¹Ë¿ÍĞÅÏ¢£¬½«¹Ë¿ÍÎÄ¼ş·ÅÈë³ÌĞòÖĞ
+{//åˆå§‹åŒ–é¡¾å®¢ä¿¡æ¯ï¼Œå°†é¡¾å®¢æ–‡ä»¶æ”¾å…¥ç¨‹åºä¸­
 	ifstream fin(BUYERFILE, ios::in);
 
-	string name;//ÂòÕßµÄĞÕÃû
-	string phone;//ÂòÕßµÄµç»°ºÅÂë
-	string isMember;//ÊÇ·ñÊÇ»áÔ±
-	double money;//Ïû·Ñ½ğ¶î,Ïû·Ñ½ğ¶î´ïµ½200³ÉÎª»áÔ±
+	string name;//ä¹°è€…çš„å§“å
+	string phone;//ä¹°è€…çš„ç”µè¯å·ç 
+	string isMember;//æ˜¯å¦æ˜¯ä¼šå‘˜
+	double money;//æ¶ˆè´¹é‡‘é¢,æ¶ˆè´¹é‡‘é¢è¾¾åˆ°200æˆä¸ºä¼šå‘˜
 
-	getline(fin, name);//³ÔµôµÚÒ»ĞĞÌáÊ¾ĞÅÏ¢
+	getline(fin, name);//åƒæ‰ç¬¬ä¸€è¡Œæç¤ºä¿¡æ¯
 	for (int i = 0; i < buyer.size(); i++)
-	{//½«¹Ë¿ÍµÄĞÅÏ¢Ò»µãÒ»µã¶ÁÈë
+	{//å°†é¡¾å®¢çš„ä¿¡æ¯ä¸€ç‚¹ä¸€ç‚¹è¯»å…¥
 		fin >> name >> phone >> isMember >> money;
-		buyer[i] = Buyer(name, phone, isMember == "ÊÇ", money);
+		buyer[i] = Buyer(name, phone, isMember == "æ˜¯", money);
 	}
-	fin.close();//ÎÄ¼ş¹Ø±Õ
+	fin.close();//æ–‡ä»¶å…³é—­
 }
 
 int GiftManage::getSaleRecordsSize()
-{//»ñÈ¡ÏúÊÛ¼ÇÂ¼µÄ³¤¶È
-	ifstream fin(SALERECORDSFILE, ios::in);//´ò¿ªÏúÊÛ¼ÇÂ¼µÄÎÄ¼ş
+{//è·å–é”€å”®è®°å½•çš„é•¿åº¦
+	ifstream fin(SALERECORDSFILE, ios::in);//æ‰“å¼€é”€å”®è®°å½•çš„æ–‡ä»¶
 
-	string s;//³ÔµôµÚÒ»ĞĞÊı¾İ
+	string s;//åƒæ‰ç¬¬ä¸€è¡Œæ•°æ®
 	getline(fin, s);
 	int Size = 0;
-	while (getline(fin, s)) Size++;//¼ÇÂ¼ĞĞÊı
+	while (getline(fin, s)) Size++;//è®°å½•è¡Œæ•°
 
-	fin.close();//¹Ø±ÕÎÄ¼ş 
+	fin.close();//å…³é—­æ–‡ä»¶ 
 	return Size;
 }
 
 void GiftManage::SaleRecordsInit()
-{//³õÊ¼»¯ÏúÊÛ¼ÇÂ¼
-	ifstream fin(SALERECORDSFILE, ios::in);//´ò¿ªÏúÊÛ¼ÇÂ¼ÎÄ¼ş
+{//åˆå§‹åŒ–é”€å”®è®°å½•
+	ifstream fin(SALERECORDSFILE, ios::in);//æ‰“å¼€é”€å”®è®°å½•æ–‡ä»¶
 
-	string name;//ÈËÃû
-	string phone;//µç»°ºÅÂë
-	string giftName;//ÀñÆ·Ãû³Æ
-	string number;//ÀñÆ·±àºÅ
-	double cost;//ÀñÆ·³É±¾
-	double price;//ÀñÆ·ÊÛ¼Û
-	double actualPrice;//Êµ¼ÊÊÛ¼Û
-	int amount;//ÊıÁ¿
-	int year = 0, month = 0, day = 0;//¶¨ÒåÄêÔÂÈÕ
+	string name;//äººå
+	string phone;//ç”µè¯å·ç 
+	string giftName;//ç¤¼å“åç§°
+	string number;//ç¤¼å“ç¼–å·
+	double cost;//ç¤¼å“æˆæœ¬
+	double price;//ç¤¼å“å”®ä»·
+	double actualPrice;//å®é™…å”®ä»·
+	int amount;//æ•°é‡
+	int year = 0, month = 0, day = 0;//å®šä¹‰å¹´æœˆæ—¥
 
-	getline(fin, name);//³ÔµôµÚÒ»ĞĞÌáÊ¾ĞÅÏ¢
+	getline(fin, name);//åƒæ‰ç¬¬ä¸€è¡Œæç¤ºä¿¡æ¯
 	for (int i = 0; i < saleRecords.size(); i++)
-	{//½«ÎÄ¼şÀïÃæµÄÊı¾İ°¤¸ö¶ÁÈë
+	{//å°†æ–‡ä»¶é‡Œé¢çš„æ•°æ®æŒ¨ä¸ªè¯»å…¥
 		fin >> name >> phone >> giftName >> number >> cost >> price >> actualPrice >> amount;
 		string s;
 		fin >> s;
-		//ÒÔÏÂÊÇ¼ÆËãÄêÔÂÈÕµÄ
+		//ä»¥ä¸‹æ˜¯è®¡ç®—å¹´æœˆæ—¥çš„
 		year = 0, month = 0, day = 0;
-		for (int j = 0; j < 4; j++) year = year * 10 + s[j] - '0';//¼ÆËãÄê
-		for (int j = 5; j < 7; j++) month = month * 10 + s[j] - '0';//¼ÆËãÔÂ
-		for (int j = 8; j < 10; j++) day = day * 10 + s[j] - '0';//¼ÆËãÈÕ
+		for (int j = 0; j < 4; j++) year = year * 10 + s[j] - '0';//è®¡ç®—å¹´
+		for (int j = 5; j < 7; j++) month = month * 10 + s[j] - '0';//è®¡ç®—æœˆ
+		for (int j = 8; j < 10; j++) day = day * 10 + s[j] - '0';//è®¡ç®—æ—¥
 		saleRecords[i] = SaleRecords(name, phone, giftName, number, cost, price, actualPrice, amount, Date(year, month, day));
 	}
-	fin.close();//¹Ø±ÕÎÄ¼ş
+	fin.close();//å…³é—­æ–‡ä»¶
 }
 
-//Í¨¹ıÀñÆ·±àºÅ²éÕÒÀñÆ·´æ²»´æÔÚ
+//é€šè¿‡ç¤¼å“ç¼–å·æŸ¥æ‰¾ç¤¼å“å­˜ä¸å­˜åœ¨
 int GiftManage::checkGift(string number)
-{//²éÑ¯ÓĞÃ»ÓĞÀñÆ·£¬´æÔÚ·µ»ØÎ»ÖÃ£¬²»´æÔÚ·µ»Ø-1
+{//æŸ¥è¯¢æœ‰æ²¡æœ‰ç¤¼å“ï¼Œå­˜åœ¨è¿”å›ä½ç½®ï¼Œä¸å­˜åœ¨è¿”å›-1
 	for (int i = 0; i < gift.size(); i++)
 		if (gift[i].getNumber() == number)
-			return i;//·µ»ØÎ»ÖÃ
+			return i;//è¿”å›ä½ç½®
 		else if (gift[i].getNumber() > number)
-			return -1;//ÒòÎªÀñÆ·ÎÄ¼ş°´ÕÕÀñÆ·±àºÅÅÅĞò£¬
-					  //ËùÒÔ±àºÅ´óÓÚËùÒª²éÑ¯µÄ£¬¾Í¿ÉÒÔÖ±½Ó·µ»ØÃ»ÓĞÁË
+			return -1;//å› ä¸ºç¤¼å“æ–‡ä»¶æŒ‰ç…§ç¤¼å“ç¼–å·æ’åºï¼Œ
+					  //æ‰€ä»¥ç¼–å·å¤§äºæ‰€è¦æŸ¥è¯¢çš„ï¼Œå°±å¯ä»¥ç›´æ¥è¿”å›æ²¡æœ‰äº†
 	return -1;
 }
 
-//Í¨¹ıÊÖ»úºÅ²éÑ¯¹Ë¿Í
+//é€šè¿‡æ‰‹æœºå·æŸ¥è¯¢é¡¾å®¢
 int GiftManage::checkBuyer(string phone)
-{//²éÑ¯¹Ë¿Í´æ²»´æÔÚ£¬´æÔÚ·µ»ØÎ»ÖÃ£¬²»´æÔÚ·µ»Ø-1
+{//æŸ¥è¯¢é¡¾å®¢å­˜ä¸å­˜åœ¨ï¼Œå­˜åœ¨è¿”å›ä½ç½®ï¼Œä¸å­˜åœ¨è¿”å›-1
 	for (int i = 0; i < buyer.size(); i++)
 		if (buyer[i].getPhone() == phone) 
 			return i;
@@ -282,282 +282,282 @@ int GiftManage::checkBuyer(string phone)
 
 void GiftManage::menu()
 {
-	cout << "************** »¶Ó­À´µ½ÀñÆ·×¨Âôµê¹ÜÀíÏµÍ³ **************" << endl;
-	cout << "****************** A.ÏÔÊ¾ËùÓĞÀñÆ·ĞÅÏ¢ ******************" << endl;
-	cout << "****************** B.ÏÔÊ¾ËùÓĞ¹Ë¿ÍĞÅÏ¢ ******************" << endl;
-	cout << "****************** C.ÏÔÊ¾ËùÓĞÏúÊÛ¼ÇÂ¼ ******************" << endl;
-	cout << "****************** D.Ìí¼ÓÀñÆ·Èë²Ö¿â   ******************" << endl;
-	cout << "****************** E.½«ÀñÆ·ÊÛ³ö       ******************" << endl;
-	cout << "****************** F.ĞŞ¸ÄÀñÆ·µÄĞÅÏ¢   ******************" << endl;
-	cout << "****************** G.ĞŞ¸Ä¹Ë¿ÍµÄĞÅÏ¢   ******************" << endl;
-	cout << "****************** H.²éÑ¯ÀñÆ·ĞÅÏ¢     ******************" << endl;
-	cout << "****************** I.²éÑ¯¹Ë¿ÍĞÅÏ¢     ******************" << endl;
-	cout << "****************** J.²éÑ¯ÏúÊÛ¼ÇÂ¼     ******************" << endl;
-	cout << "****************** K.¼ÆËã×ÜÀûÈó       ******************" << endl;
-	cout << "****************** L.ÍË³öÀñÆ·×¨Âôµê¹ÜÀíÏµÍ³ ************" << endl;
+	cout << "************** æ¬¢è¿æ¥åˆ°ç¤¼å“ä¸“å–åº—ç®¡ç†ç³»ç»Ÿ **************" << endl;
+	cout << "****************** A.æ˜¾ç¤ºæ‰€æœ‰ç¤¼å“ä¿¡æ¯ ******************" << endl;
+	cout << "****************** B.æ˜¾ç¤ºæ‰€æœ‰é¡¾å®¢ä¿¡æ¯ ******************" << endl;
+	cout << "****************** C.æ˜¾ç¤ºæ‰€æœ‰é”€å”®è®°å½• ******************" << endl;
+	cout << "****************** D.æ·»åŠ ç¤¼å“å…¥ä»“åº“   ******************" << endl;
+	cout << "****************** E.å°†ç¤¼å“å”®å‡º       ******************" << endl;
+	cout << "****************** F.ä¿®æ”¹ç¤¼å“çš„ä¿¡æ¯   ******************" << endl;
+	cout << "****************** G.ä¿®æ”¹é¡¾å®¢çš„ä¿¡æ¯   ******************" << endl;
+	cout << "****************** H.æŸ¥è¯¢ç¤¼å“ä¿¡æ¯     ******************" << endl;
+	cout << "****************** I.æŸ¥è¯¢é¡¾å®¢ä¿¡æ¯     ******************" << endl;
+	cout << "****************** J.æŸ¥è¯¢é”€å”®è®°å½•     ******************" << endl;
+	cout << "****************** K.è®¡ç®—æ€»åˆ©æ¶¦       ******************" << endl;
+	cout << "****************** L.é€€å‡ºç¤¼å“ä¸“å–åº—ç®¡ç†ç³»ç»Ÿ ************" << endl;
 }
 
-void GiftManage::showGift()//ÏÔÊ¾ËùÓĞÀñÆ·ĞÅÏ¢
+void GiftManage::showGift()//æ˜¾ç¤ºæ‰€æœ‰ç¤¼å“ä¿¡æ¯
 {
 	if (gift.size() == 0)
 	{
-		cout << "ÀñÆ·ĞÅÏ¢Îª¿Õ" << endl;
+		cout << "ç¤¼å“ä¿¡æ¯ä¸ºç©º" << endl;
 		return;
 	}
 	cout.setf(ios::left);
-	//Êä³öÀñÆ·ÌáÊ¾ĞÅÏ¢
-	cout << setw(15) << "ÀñÆ·±àºÅ" << setw(15) << "ÀñÆ·Ãû³Æ" << setw(15) <<
-		"½ø¼Û³É±¾" << setw(15) << "ÊÛÂô¼Û¸ñ" << setw(15) << "²úÆ·ÊıÁ¿" << endl;
+	//è¾“å‡ºç¤¼å“æç¤ºä¿¡æ¯
+	cout << setw(15) << "ç¤¼å“ç¼–å·" << setw(15) << "ç¤¼å“åç§°" << setw(15) <<
+		"è¿›ä»·æˆæœ¬" << setw(15) << "å”®å–ä»·æ ¼" << setw(15) << "äº§å“æ•°é‡" << endl;
 	for (int i = 0; i < gift.size(); i++)
 		cout << gift[i] << endl;
 	cout.unsetf(ios::left);
 }
 
-void GiftManage::showBuyer()//ÏÔÊ¾ËùÓĞ¹Ë¿ÍĞÅÏ¢
+void GiftManage::showBuyer()//æ˜¾ç¤ºæ‰€æœ‰é¡¾å®¢ä¿¡æ¯
 {
 	if (buyer.size() == 0)
 	{
-		cout << "¹Ë¿ÍĞÅÏ¢Îª¿Õ" << endl;
+		cout << "é¡¾å®¢ä¿¡æ¯ä¸ºç©º" << endl;
 		return;
 	}
-	//Êä³ö¹Ë¿ÍÌáÊ¾ĞÅÏ¢
+	//è¾“å‡ºé¡¾å®¢æç¤ºä¿¡æ¯
 	cout.setf(ios::left);
-	cout << setw(15) << "ĞÕÃû" << setw(15) << "µç»°ºÅÂë" <<
-		setw(15) << "ÊÇ»áÔ±Âğ" << setw(15) << "Ïû·Ñ½ğ¶î" << endl;
+	cout << setw(15) << "å§“å" << setw(15) << "ç”µè¯å·ç " <<
+		setw(15) << "æ˜¯ä¼šå‘˜å—" << setw(15) << "æ¶ˆè´¹é‡‘é¢" << endl;
 	for (int i = 0; i < buyer.size(); i++)
 		cout << buyer[i] << endl;
 	cout.unsetf(ios::left);
 }
 
-void GiftManage::showSaleRecords()//ÏÔÊ¾ËùÓĞÏúÊÛ¼ÇÂ¼
+void GiftManage::showSaleRecords()//æ˜¾ç¤ºæ‰€æœ‰é”€å”®è®°å½•
 {
 	if (saleRecords.size() == 0)
 	{
-		cout << "ÏúÊÛ¼ÇÂ¼Îª¿Õ" << endl;
+		cout << "é”€å”®è®°å½•ä¸ºç©º" << endl;
 		return;
 	}
-	//Êä³öÏúÊÛ¼ÇÂ¼µÄÌáÊ¾ĞÅÏ¢
+	//è¾“å‡ºé”€å”®è®°å½•çš„æç¤ºä¿¡æ¯
 	cout.setf(ios::left);
-	cout << setw(15) << "ĞÕÃû" << setw(15) << "µç»°ºÅÂë" << setw(15) << "ÀñÆ·Ãû³Æ"
-		<< setw(15) << "ÀñÆ·±àºÅ" << setw(15) << "ÀñÆ·ÊÛ¼Û" << setw(15) << "Êµ¼ÊÊÛ¼Û"
-		<< setw(15) << "¹ºÂòÊıÁ¿" << setw(15) << "¹ºÂòÈÕÆÚ" << endl;
+	cout << setw(15) << "å§“å" << setw(15) << "ç”µè¯å·ç " << setw(15) << "ç¤¼å“åç§°"
+			<< setw(15) << "ç¤¼å“ç¼–å·" << setw(15) << "ç¤¼å“æˆæœ¬" << setw(15) << "ç¤¼å“å”®ä»·" 
+			<< setw(15) << "å®é™…å”®ä»·" << setw(15) << "è´­ä¹°æ•°é‡" << setw(15) << "è´­ä¹°æ—¥æœŸ" << endl;
 	for (int i = 0; i < saleRecords.size(); i++)
 		cout << saleRecords[i] << endl;
 	cout.unsetf(ios::left);
 }
 
-//Ôö¼ÓÀñÆ·
-void GiftManage::addGift()//Ìí¼ÓÀñÆ·Èë²Ö¿â
+//å¢åŠ ç¤¼å“
+void GiftManage::addGift()//æ·»åŠ ç¤¼å“å…¥ä»“åº“
 {
-	string number;//ÀñÆ·±àºÅ
-	int amount;//²úÆ·ÊıÁ¿
-	cout << "ÇëÊäÈëÄãÒªÌí¼ÓµÄÀñÆ·µÄÀñÆ·±àºÅ£º" << endl;
+	string number;//ç¤¼å“ç¼–å·
+	int amount;//äº§å“æ•°é‡
+	cout << "è¯·è¾“å…¥ä½ è¦æ·»åŠ çš„ç¤¼å“çš„ç¤¼å“ç¼–å·ï¼š" << endl;
 	cin >> number;
 
-	int idx = checkGift(number);//»ñÈ¡ÀñÆ·µÄÎ»ÖÃ
-	if (~idx)//Èç¹û²úÆ·ÒÑ¾­´æÔÚ
-	{//¾Í¿ÉÒÔÖ±½ÓÔÚÆä»ù´¡ÉÏÔö¼ÓÊıÁ¿
-		cout << "ÇëÊäÈëÄãÒªÌí¼ÓµÄÀñÆ·µÄ²úÆ·ÊıÁ¿£º" << endl;
+	int idx = checkGift(number);//è·å–ç¤¼å“çš„ä½ç½®
+	if (~idx)//å¦‚æœäº§å“å·²ç»å­˜åœ¨
+	{//å°±å¯ä»¥ç›´æ¥åœ¨å…¶åŸºç¡€ä¸Šå¢åŠ æ•°é‡
+		cout << "è¯·è¾“å…¥ä½ è¦æ·»åŠ çš„ç¤¼å“çš„äº§å“æ•°é‡ï¼š" << endl;
 		cin >> amount;
 		gift[idx].setAmount(gift[idx].getAmount() + amount);
 		return;
 	}
 
-	string name;//ÀñÆ·Ãû³Æ
-	double cost;//½ø¼Û³É±¾
-	double price;//ÊÛÂô¼Û¸ñ
+	string name;//ç¤¼å“åç§°
+	double cost;//è¿›ä»·æˆæœ¬
+	double price;//å”®å–ä»·æ ¼
 
-	cout << "ÇëÊäÈëÄãÒªÌí¼ÓµÄÀñÆ·µÄÀñÆ·Ãû³Æ£º" << endl;
+	cout << "è¯·è¾“å…¥ä½ è¦æ·»åŠ çš„ç¤¼å“çš„ç¤¼å“åç§°ï¼š" << endl;
 	cin >> name;
 
-	cout << "ÇëÊäÈëÄãÒªÌí¼ÓµÄÀñÆ·µÄ½ø¼Û£º" << endl;
+	cout << "è¯·è¾“å…¥ä½ è¦æ·»åŠ çš„ç¤¼å“çš„è¿›ä»·ï¼š" << endl;
 	cin >> cost;
 
-	cout << "ÇëÊäÈëÄãÒªÌí¼ÓµÄÀñÆ·µÄÊÛ¼Û£º" << endl;
+	cout << "è¯·è¾“å…¥ä½ è¦æ·»åŠ çš„ç¤¼å“çš„å”®ä»·ï¼š" << endl;
 	cin >> price;
 
-	cout << "ÇëÊäÈëÄãÒªÌí¼ÓµÄÀñÆ·µÄ²úÆ·ÊıÁ¿£º" << endl;
+	cout << "è¯·è¾“å…¥ä½ è¦æ·»åŠ çš„ç¤¼å“çš„äº§å“æ•°é‡ï¼š" << endl;
 	cin >> amount;
 
-	//¼ÓÈëĞÂµÄÀñÆ·
+	//åŠ å…¥æ–°çš„ç¤¼å“
 	gift.push_back(Gift(number, name, cost, price, amount));
-	//½«ĞÂ¼ÓÈëµÄÀñÆ··Åµ½ºÏÊÊµÄÎ»ÖÃ
-	for (int i = gift.size() - 1; i >= 1; i--)//gift°´ÕÕ±àºÅ×ÖµäĞòÅÅĞò
+	//å°†æ–°åŠ å…¥çš„ç¤¼å“æ”¾åˆ°åˆé€‚çš„ä½ç½®
+	for (int i = gift.size() - 1; i >= 1; i--)//giftæŒ‰ç…§ç¼–å·å­—å…¸åºæ’åº
 		if (gift[i].getNumber() < gift[i - 1].getNumber())
 			swap(gift[i], gift[i - 1]);
 }
 
-//ĞÂÔö¹Ë¿Í
+//æ–°å¢é¡¾å®¢
 int GiftManage::addBuyer(string name, string phone, double money)
 {
-	buyer.push_back(Buyer(name, phone));//¼ÓÈëĞÂµÄ¹Ë¿Í
-	buyer[buyer.size() - 1].setMoney(money);//ĞŞ¸Ä¹Ë¿ÍµÄÏû·Ñ
-	//°´ÕÕÃû×Ö×ÖµäĞòÅÅĞò
+	buyer.push_back(Buyer(name, phone));//åŠ å…¥æ–°çš„é¡¾å®¢
+	buyer[buyer.size() - 1].setMoney(money);//ä¿®æ”¹é¡¾å®¢çš„æ¶ˆè´¹
+	//æŒ‰ç…§åå­—å­—å…¸åºæ’åº
 	for (int i = buyer.size() - 1; i >= 1; i--)
 		if (buyer[i].getName() < buyer[i - 1].getName())
 			swap(buyer[i], buyer[i - 1]);
-		else return i;//·µ»Ø¼ÓÈëµÄ¹Ë¿ÍµÄÎ»ÖÃ
+		else return i;//è¿”å›åŠ å…¥çš„é¡¾å®¢çš„ä½ç½®
 	return 0;
 }
 
-//Ôö¼ÓÏúÊÛ¼ÇÂ¼
+//å¢åŠ é”€å”®è®°å½•
 void GiftManage::addSaleRecords(string name, string phone, string giftName, string number,
-	double cost, double price, double actualPrice, int amount)//Ìí¼ÓÏúÊÛ¼ÇÂ¼
+	double cost, double price, double actualPrice, int amount)//æ·»åŠ é”€å”®è®°å½•
 {
 	int year = 0, month = 0, day = 0;
-	//»ñÈ¡±¾ÊÂÊµÊ±Ê±¼ä
+	//è·å–æœ¬äº‹å®æ—¶æ—¶é—´
 	time_t now;
 	time(&now);
 	tm* t = new tm;
 	localtime_s(t, &now);
 	year = 1900 + t-> tm_year, month = 1 + t->tm_mon, day = t->tm_mday;
-	//Ôö¼ÓÏúÊÛ¼ÇÂ¼
+	//å¢åŠ é”€å”®è®°å½•
 	saleRecords.push_back(SaleRecords(name, phone, giftName, number, cost, price, actualPrice, amount, Date(year, month, day)));
 }
 
-void GiftManage::sellGift()//½«ÀñÆ·ÊÛ³ö
+void GiftManage::sellGift()//å°†ç¤¼å“å”®å‡º
 {
-	cout << "ÇëÊäÈëÒªÊÛ³öµÄÀñÆ·µÄ±àºÅ£º" << endl;
+	cout << "è¯·è¾“å…¥è¦å”®å‡ºçš„ç¤¼å“çš„ç¼–å·ï¼š" << endl;
 	string number;
 	cin >> number;
 
-	int idx = checkGift(number);//»ñµÃÀñÆ·µÄÎ»ÖÃ
+	int idx = checkGift(number);//è·å¾—ç¤¼å“çš„ä½ç½®
 	if (idx == -1)
 	{
-		cout << "²úÆ·²»´æÔÚ" << endl;
+		cout << "äº§å“ä¸å­˜åœ¨" << endl;
 	}
 	else
 	{
-		cout << "ÇëÊäÈëÒªÊÛ³öµÄ²úÆ·µÄÊıÁ¿£º" << endl;
+		cout << "è¯·è¾“å…¥è¦å”®å‡ºçš„äº§å“çš„æ•°é‡ï¼š" << endl;
 		int amount;
 		cin >> amount;
 		if (gift[idx].getAmount() < amount)
 		{
-			cout << "³öÊÛÊ§°Ü£¬²úÆ·¿â´æ²»×ã" << endl;
-			cout << "¿â´æÈİÁ¿£º" << gift[idx].getAmount() << endl;
+			cout << "å‡ºå”®å¤±è´¥ï¼Œäº§å“åº“å­˜ä¸è¶³" << endl;
+			cout << "åº“å­˜å®¹é‡ï¼š" << gift[idx].getAmount() << endl;
 		}
 		else
 		{
-			//Í¬²½ĞŞ¸Ä¹Ë¿ÍĞÅÏ¢ºÍÏúÊÛ¼ÇÂ¼
-			cout << "ÇëÊäÈë¹ºÂòÀñÆ·µÄ¹Ë¿ÍĞÅÏ¢" << endl;
+			//åŒæ­¥ä¿®æ”¹é¡¾å®¢ä¿¡æ¯å’Œé”€å”®è®°å½•
+			cout << "è¯·è¾“å…¥è´­ä¹°ç¤¼å“çš„é¡¾å®¢ä¿¡æ¯" << endl;
 			string name;
 			string phone;
-			cout << "ÇëÊäÈë¹ºÂòÀñÆ·µÄ¹Ë¿ÍĞÕÃû" << endl;
+			cout << "è¯·è¾“å…¥è´­ä¹°ç¤¼å“çš„é¡¾å®¢å§“å" << endl;
 			cin >> name;
 
-			cout << "ÇëÊäÈë¹ºÂòÀñÆ·µÄ¹Ë¿ÍÊÖ»úºÅÂë" << endl;
+			cout << "è¯·è¾“å…¥è´­ä¹°ç¤¼å“çš„é¡¾å®¢æ‰‹æœºå·ç " << endl;
 			cin >> phone;
 
-			int buyerIdx = checkBuyer(phone);//»ñµÃ¹Ë¿ÍµÄÎ»ÖÃ
+			int buyerIdx = checkBuyer(phone);//è·å¾—é¡¾å®¢çš„ä½ç½®
 
-			/*********Ôö¼Ó¹Ë¿ÍĞÅÏ¢*********/
-			double discount = 1;//±ê¼ÇÊÇ·ñÕÛ¿Û
-			if (~buyerIdx)//Èç¹û¹Ë¿ÍÒÑ¾­´æÔÚ
-			{//Ö±½ÓĞŞ¸Ä¼Û¸ñ¼´¿É
+			/*********å¢åŠ é¡¾å®¢ä¿¡æ¯*********/
+			double discount = 1;//æ ‡è®°æ˜¯å¦æŠ˜æ‰£
+			if (~buyerIdx)//å¦‚æœé¡¾å®¢å·²ç»å­˜åœ¨
+			{//ç›´æ¥ä¿®æ”¹ä»·æ ¼å³å¯
 				if (buyer[buyerIdx].getIsMember())
-				{//»áÔ±´ò°ËÕÛ
-					discount = 0.8;//»áÔ±´òÕÛ
-					//ĞŞ¸Ä¹Ë¿ÍÏû·Ñ½ğ¶î
+				{//ä¼šå‘˜æ‰“å…«æŠ˜
+					discount = 0.8;//ä¼šå‘˜æ‰“æŠ˜
+					//ä¿®æ”¹é¡¾å®¢æ¶ˆè´¹é‡‘é¢
 					buyer[buyerIdx].setMoney(buyer[buyerIdx].getMoney() + amount * 0.8 * gift[idx].getPrice());
 				}
 				else
-				{//ĞŞ¸Ä¹Ë¿ÍÏû·Ñ½ğ¶î
+				{//ä¿®æ”¹é¡¾å®¢æ¶ˆè´¹é‡‘é¢
 					buyer[buyerIdx].setMoney(buyer[buyerIdx].getMoney() + amount * gift[idx].getPrice());
 				}
 			}
 			else
-			{//¹Ë¿Í²»´æÔÚµÄ»°Ôö¼ÓÈëĞÂµÄ¹Ë¿Í
+			{//é¡¾å®¢ä¸å­˜åœ¨çš„è¯å¢åŠ å…¥æ–°çš„é¡¾å®¢
 				buyerIdx = addBuyer(name, phone, amount * gift[idx].getPrice());
 			}
-			/*********Ôö¼ÓÏúÊÛ¼ÇÂ¼*********/
-			//Ôö¼ÓĞÂµÄÏúÊÛ¼ÇÂ¼£¬Ïû·Ñ¹ıÖ®ºó²Å»á³ÉÎª»áÔ±
+			/*********å¢åŠ é”€å”®è®°å½•*********/
+			//å¢åŠ æ–°çš„é”€å”®è®°å½•ï¼Œæ¶ˆè´¹è¿‡ä¹‹åæ‰ä¼šæˆä¸ºä¼šå‘˜
 			addSaleRecords(name, phone, gift[idx].getName(), number, gift[idx].getCost(), gift[idx].getPrice(), 
 				gift[idx].getPrice() * discount, amount);
-			//¸üĞÂÊıÁ¿
+			//æ›´æ–°æ•°é‡
 			gift[idx].setAmount(gift[idx].getAmount() - amount);
-			cout << "³öÊÛ³É¹¦" << endl;
+			cout << "å‡ºå”®æˆåŠŸ" << endl;
 		}
 	}
 }
 
-void GiftManage::updateGift()//ĞŞ¸ÄÀñÆ·µÄĞÅÏ¢
-{//ĞŞ¸ÄÀñÆ·ĞÅÏ¢µÄÊ±ºò£¬¼ÇÂ¼²»ÄÜÍ¬²½ĞŞ¸Ä£¬ÒòÎªÀñÆ·ÒÑ¾­Âô³öÈ¥£¬ÊÛ¼ÛµÈÖî¶àĞÅÏ¢²»ÒËĞŞ¸Ä
-	string number;//ÀñÆ·±àºÅ
-	cout << "ÇëÊäÈëÄãÒªĞŞ¸ÄµÄÀñÆ·±àºÅ" << endl;
+void GiftManage::updateGift()//ä¿®æ”¹ç¤¼å“çš„ä¿¡æ¯
+{//ä¿®æ”¹ç¤¼å“ä¿¡æ¯çš„æ—¶å€™ï¼Œè®°å½•ä¸èƒ½åŒæ­¥ä¿®æ”¹ï¼Œå› ä¸ºç¤¼å“å·²ç»å–å‡ºå»ï¼Œå”®ä»·ç­‰è¯¸å¤šä¿¡æ¯ä¸å®œä¿®æ”¹
+	string number;//ç¤¼å“ç¼–å·
+	cout << "è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„ç¤¼å“ç¼–å·" << endl;
 	cin >> number;
 
-	int idx = checkGift(number);//²éÕÒÀñÆ·Î»ÖÃ
+	int idx = checkGift(number);//æŸ¥æ‰¾ç¤¼å“ä½ç½®
 	if (idx == -1)
 	{
-		cout << "²úÆ·²»´æÔÚ" << endl;
+		cout << "äº§å“ä¸å­˜åœ¨" << endl;
 		return;
 	}
 
-	cout << "ÇëÊäÈëÄãÒªĞŞ¸ÄµÄÀñÆ·µÄĞÂĞÅÏ¢" << endl;
-	string name;//ÀñÆ·Ãû³Æ
-	double cost;//½ø¼Û³É±¾
-	double price;//ÊÛÂô¼Û¸ñ
-	int amount;//²úÆ·ÊıÁ¿
+	cout << "è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„ç¤¼å“çš„æ–°ä¿¡æ¯" << endl;
+	string name;//ç¤¼å“åç§°
+	double cost;//è¿›ä»·æˆæœ¬
+	double price;//å”®å–ä»·æ ¼
+	int amount;//äº§å“æ•°é‡
 
-	cout << "ÇëÊäÈëÄãÒªĞŞ¸ÄµÄÀñÆ·µÄĞÂµÄ±àºÅ" << endl;
+	cout << "è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„ç¤¼å“çš„æ–°çš„ç¼–å·" << endl;
 	cin >> number;
 
-	cout << "ÇëÊäÈëÄãÒªĞŞ¸ÄµÄÀñÆ·µÄĞÂµÄÃû³Æ£º" << endl;
+	cout << "è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„ç¤¼å“çš„æ–°çš„åç§°ï¼š" << endl;
 	cin >> name;
 
-	cout << "ÇëÊäÈëÄãÒªĞŞ¸ÄµÄÀñÆ·µÄĞÂµÄ½ø¼Û£º" << endl;
+	cout << "è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„ç¤¼å“çš„æ–°çš„è¿›ä»·ï¼š" << endl;
 	cin >> cost;
 
-	cout << "ÇëÊäÈëÄãÒªĞŞ¸ÄµÄÀñÆ·µÄĞÂµÄÊÛ¼Û£º" << endl;
+	cout << "è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„ç¤¼å“çš„æ–°çš„å”®ä»·ï¼š" << endl;
 	cin >> price;
 
 
-	//¿â´æÁ¿ÓĞ¶àÉÙ¾ÍÊÇ¶àÉÙ
+	//åº“å­˜é‡æœ‰å¤šå°‘å°±æ˜¯å¤šå°‘
 	amount = gift[idx].getAmount();
 
 	string choice;
-	cout << "ÄãÒªĞŞ¸Ä¿â´æÁ¿Âğ£¿(YES/NO)" << endl;
+	cout << "ä½ è¦ä¿®æ”¹åº“å­˜é‡å—ï¼Ÿ(YES/NO)" << endl;
 	cin >> choice;
 
 	if(choice == "YES")
 	{
-		cout << "ÇëÊäÈëÄãÒªĞŞ¸ÄµÄÀñÆ·µÄĞÂµÄ¿â´æÁ¿£º" << endl;
+		cout << "è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„ç¤¼å“çš„æ–°çš„åº“å­˜é‡ï¼š" << endl;
 		cin >> amount;
 	}
 
 	gift[idx] = Gift(number, name, cost, price, amount);
-	cout << "ĞŞ¸Ä³É¹¦" << endl;
+	cout << "ä¿®æ”¹æˆåŠŸ" << endl;
 }
 
-void GiftManage::updateBuyer()//ĞŞ¸Ä¹Ë¿ÍµÄĞÅÏ¢
-{//ĞŞ¸Ä¹Ë¿ÍĞÅÏ¢µÄÊ±ºò£¬ĞèÒªÍ¬²½½«¼ÇÂ¼Í¬²½ĞŞ¸Ä
-	string phone;//ÂòÕßµÄµç»°ºÅÂë
+void GiftManage::updateBuyer()//ä¿®æ”¹é¡¾å®¢çš„ä¿¡æ¯
+{//ä¿®æ”¹é¡¾å®¢ä¿¡æ¯çš„æ—¶å€™ï¼Œéœ€è¦åŒæ­¥å°†è®°å½•åŒæ­¥ä¿®æ”¹
+	string phone;//ä¹°è€…çš„ç”µè¯å·ç 
 
-	cout << "ÇëÊäÈëÄãÒªĞŞ¸ÄµÄ¹Ë¿ÍµÄµç»°ºÅÂë" << endl;
+	cout << "è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„é¡¾å®¢çš„ç”µè¯å·ç " << endl;
 	cin >> phone;
 
-	int idx = checkBuyer(phone);//²éÕÒ¹Ë¿ÍµÄÎ»ÖÃ
+	int idx = checkBuyer(phone);//æŸ¥æ‰¾é¡¾å®¢çš„ä½ç½®
 	if (idx == -1)
 	{
-		cout << "´Ë¹Ë¿Í²»´æÔÚ" << endl;
+		cout << "æ­¤é¡¾å®¢ä¸å­˜åœ¨" << endl;
 		return;
 	}
 
-	string lastPhone = phone;//¼ÇÂ¼Ò»ÏÂĞŞ¸ÄÇ°µÄÊÖ»úºÅ
+	string lastPhone = phone;//è®°å½•ä¸€ä¸‹ä¿®æ”¹å‰çš„æ‰‹æœºå·
 
-	cout << "ÇëÊäÈëÄãÒªĞŞ¸ÄµÄ¹Ë¿ÍµÄĞÂµÄĞÅÏ¢" << endl;
-	string name;//ÂòÕßµÄĞÕÃû
+	cout << "è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„é¡¾å®¢çš„æ–°çš„ä¿¡æ¯" << endl;
+	string name;//ä¹°è€…çš„å§“å
 	 
-	cout << "ÇëÊäÈëÄãÒªĞŞ¸ÄµÄ¹Ë¿ÍµÄĞÂµÄĞÕÃû" << endl;
+	cout << "è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„é¡¾å®¢çš„æ–°çš„å§“å" << endl;
 	cin >> name;
 
-	cout << "ÇëÊäÈëÄãÒªĞŞ¸ÄµÄ¹Ë¿ÍµÄĞÂµÄÊÖ»úºÅ" << endl;
+	cout << "è¯·è¾“å…¥ä½ è¦ä¿®æ”¹çš„é¡¾å®¢çš„æ–°çš„æ‰‹æœºå·" << endl;
 	cin >> phone;
 
 	buyer[idx].setName(name);
 	buyer[idx].setPhone(phone);
 
-	//Í¬²½ĞŞ¸ÄÏúÊÛ¼ÇÂ¼ĞÅÏ¢
+	//åŒæ­¥ä¿®æ”¹é”€å”®è®°å½•ä¿¡æ¯
 	for (int i = 0; i < saleRecords.size(); i++)
 	{
 		if (saleRecords[i].getPhone() == lastPhone)
@@ -567,27 +567,27 @@ void GiftManage::updateBuyer()//ĞŞ¸Ä¹Ë¿ÍµÄĞÅÏ¢
 		}
 	}
 	
-	cout << "ĞŞ¸Ä³É¹¦" << endl;
+	cout << "ä¿®æ”¹æˆåŠŸ" << endl;
 }
 
-void GiftManage::queryGift()//²éÑ¯ÀñÆ·ĞÅÏ¢
+void GiftManage::queryGift()//æŸ¥è¯¢ç¤¼å“ä¿¡æ¯
 {
-	cout << "ÇëÊäÈë²éÕÒÀñÆ·µÄ·½Ê½" << endl;
-	cout << "1.Í¨¹ıÀñÆ·±àºÅ²éÕÒ" << endl;
-	cout << "2.Í¨¹ıÀñÆ·Ãû³Æ²éÕÒ" << endl;
+	cout << "è¯·è¾“å…¥æŸ¥æ‰¾ç¤¼å“çš„æ–¹å¼" << endl;
+	cout << "1.é€šè¿‡ç¤¼å“ç¼–å·æŸ¥æ‰¾" << endl;
+	cout << "2.é€šè¿‡ç¤¼å“åç§°æŸ¥æ‰¾" << endl;
 
 	int choice;
 	cin >> choice;
-	int num = 0;//ÓÃÓÚ¼ÇÂ¼ÊÇ·ñ²éµ½ÀñÆ·ĞÅÏ¢ÁË
+	int num = 0;//ç”¨äºè®°å½•æ˜¯å¦æŸ¥åˆ°ç¤¼å“ä¿¡æ¯äº†
 	if (choice == 1)
 	{
-		cout << "ÇëÊäÈëÄãÏë²éÑ¯µÄÀñÆ·±àºÅ" << endl;
+		cout << "è¯·è¾“å…¥ä½ æƒ³æŸ¥è¯¢çš„ç¤¼å“ç¼–å·" << endl;
 		string number;
 		cin >> number;
 
 		cout.setf(ios::left);
-		cout << setw(15) << "ÀñÆ·±àºÅ" << setw(15) << "ÀñÆ·Ãû³Æ" << setw(15) <<
-			"½ø¼Û³É±¾" << setw(15) << "ÊÛÂô¼Û¸ñ" << setw(15) << "²úÆ·ÊıÁ¿" << endl;
+		cout << setw(15) << "ç¤¼å“ç¼–å·" << setw(15) << "ç¤¼å“åç§°" << setw(15) <<
+			"è¿›ä»·æˆæœ¬" << setw(15) << "å”®å–ä»·æ ¼" << setw(15) << "äº§å“æ•°é‡" << endl;
 		for (int i = 0; i < gift.size(); i++)
 			if (gift[i].getNumber() == number)
 			{
@@ -599,13 +599,13 @@ void GiftManage::queryGift()//²éÑ¯ÀñÆ·ĞÅÏ¢
 	}
 	else
 	{
-		cout << "ÇëÊäÈëÄãÒª²éÑ¯µÄÀñÆ·Ãû³Æ" << endl;
+		cout << "è¯·è¾“å…¥ä½ è¦æŸ¥è¯¢çš„ç¤¼å“åç§°" << endl;
 		string name;
 		cin >> name;
 
 		cout.setf(ios::left);
-		cout << setw(15) << "ÀñÆ·±àºÅ" << setw(15) << "ÀñÆ·Ãû³Æ" << setw(15) <<
-			"½ø¼Û³É±¾" << setw(15) << "ÊÛÂô¼Û¸ñ" << setw(15) << "²úÆ·ÊıÁ¿" << endl;
+		cout << setw(15) << "ç¤¼å“ç¼–å·" << setw(15) << "ç¤¼å“åç§°" << setw(15) <<
+			"è¿›ä»·æˆæœ¬" << setw(15) << "å”®å–ä»·æ ¼" << setw(15) << "äº§å“æ•°é‡" << endl;
 		
 		for (int i = 0; i < gift.size(); i++)
 			if (gift[i].getName() == name)
@@ -619,27 +619,27 @@ void GiftManage::queryGift()//²éÑ¯ÀñÆ·ĞÅÏ¢
 
 	if (!num)
 	{
-		cout << "Äú²éÕÒµÄÀñÆ·²»´æÔÚ" << endl;
+		cout << "æ‚¨æŸ¥æ‰¾çš„ç¤¼å“ä¸å­˜åœ¨" << endl;
 	}
 }
 
-void GiftManage::queryBuyer()//²éÑ¯¹Ë¿ÍĞÅÏ¢
+void GiftManage::queryBuyer()//æŸ¥è¯¢é¡¾å®¢ä¿¡æ¯
 {
-	cout << "ÇëÊäÈë²éÕÒ¹Ë¿ÍµÄ·½Ê½" << endl;
-	cout << "1.Í¨¹ıĞÕÃû²éÕÒ" << endl;
-	cout << "2.Í¨¹ıÊÖ»úºÅ²éÕÒ" << endl;
+	cout << "è¯·è¾“å…¥æŸ¥æ‰¾é¡¾å®¢çš„æ–¹å¼" << endl;
+	cout << "1.é€šè¿‡å§“åæŸ¥æ‰¾" << endl;
+	cout << "2.é€šè¿‡æ‰‹æœºå·æŸ¥æ‰¾" << endl;
 
-	int choice, num = 0;//numÓÃÓÚ±ê¼ÇÊÇ·ñ²éµ½¹Ë¿ÍĞÅÏ¢ÁË
+	int choice, num = 0;//numç”¨äºæ ‡è®°æ˜¯å¦æŸ¥åˆ°é¡¾å®¢ä¿¡æ¯äº†
 	cin >> choice;
 	if (choice == 1)
 	{
-		cout << "ÇëÊäÈëÄãÒª²éÕÒµÄ¹Ë¿ÍĞÕÃû" << endl;
+		cout << "è¯·è¾“å…¥ä½ è¦æŸ¥æ‰¾çš„é¡¾å®¢å§“å" << endl;
 		string name;
 		cin >> name;
 
 		cout.setf(ios::left);
-		cout << setw(15) << "ĞÕÃû" << setw(15) << "µç»°ºÅÂë" <<
-			setw(15) << "ÊÇ»áÔ±Âğ" << setw(15) << "Ïû·Ñ½ğ¶î" << endl;
+		cout << setw(15) << "å§“å" << setw(15) << "ç”µè¯å·ç " <<
+			setw(15) << "æ˜¯ä¼šå‘˜å—" << setw(15) << "æ¶ˆè´¹é‡‘é¢" << endl;
 		for (int i = 0; i < buyer.size(); i++)
 			if (buyer[i].getName() == name) 
 			{
@@ -651,13 +651,13 @@ void GiftManage::queryBuyer()//²éÑ¯¹Ë¿ÍĞÅÏ¢
 	}
 	else
 	{
-		cout << "ÇëÄãÊäÈëÄãÒª²éÕÒµÄ¹Ë¿ÍµÄÊÖ»úºÅ" << endl;
+		cout << "è¯·ä½ è¾“å…¥ä½ è¦æŸ¥æ‰¾çš„é¡¾å®¢çš„æ‰‹æœºå·" << endl;
 		string phone;
 		cin >> phone;
 
 		cout.setf(ios::left);
-		cout << setw(15) << "ĞÕÃû" << setw(15) << "µç»°ºÅÂë" <<
-			setw(15) << "ÊÇ»áÔ±Âğ" << setw(15) << "Ïû·Ñ½ğ¶î" << endl;
+		cout << setw(15) << "å§“å" << setw(15) << "ç”µè¯å·ç " <<
+			setw(15) << "æ˜¯ä¼šå‘˜å—" << setw(15) << "æ¶ˆè´¹é‡‘é¢" << endl;
 		for (int i = 0; i < buyer.size(); i ++ )
 			if (buyer[i].getPhone() == phone)
 			{
@@ -670,35 +670,35 @@ void GiftManage::queryBuyer()//²éÑ¯¹Ë¿ÍĞÅÏ¢
 
 	if (!num)
 	{
-		cout << "ÄãÒª²éÕÒµÄ¹Ë¿Í²»´æÔÚ" << endl;
+		cout << "ä½ è¦æŸ¥æ‰¾çš„é¡¾å®¢ä¸å­˜åœ¨" << endl;
 	}
 }
 
-void GiftManage::querySaleRecords()//²éÑ¯ÏúÊÛ¼ÇÂ¼
+void GiftManage::querySaleRecords()//æŸ¥è¯¢é”€å”®è®°å½•
 {
-	cout << "ÇëÊäÈë²éÕÒÏúÊÛ¼ÇÂ¼µÄ·½Ê½" << endl;
-	cout << "1.Í¨¹ı¹Ë¿ÍĞÕÃû²éÕÒ" << endl;
-	cout << "2.Í¨¹ı¹Ë¿ÍÊÖ»úºÅ²éÕÒ" << endl;
-	cout << "3.Í¨¹ıÀñÆ·±àºÅ²éÕÒ" << endl;
-	cout << "4.Í¨¹ıÀñÆ·Ãû³Æ²éÕÒ" << endl;
+	cout << "è¯·è¾“å…¥æŸ¥æ‰¾é”€å”®è®°å½•çš„æ–¹å¼" << endl;
+	cout << "1.é€šè¿‡é¡¾å®¢å§“åæŸ¥æ‰¾" << endl;
+	cout << "2.é€šè¿‡é¡¾å®¢æ‰‹æœºå·æŸ¥æ‰¾" << endl;
+	cout << "3.é€šè¿‡ç¤¼å“ç¼–å·æŸ¥æ‰¾" << endl;
+	cout << "4.é€šè¿‡ç¤¼å“åç§°æŸ¥æ‰¾" << endl;
 
 	string name;
 	string phone;
 	string number;
 	string giftName;
-	int num = 0;//ÓÃÓÚ¼ÇÂ¼ÊÇ·ñ²éµ½ÏúÊÛ¼ÇÂ¼ÁË
+	int num = 0;//ç”¨äºè®°å½•æ˜¯å¦æŸ¥åˆ°é”€å”®è®°å½•äº†
 
 	int choice;
 	cin >> choice;
 	switch (choice)
 	{
 	case 1:
-		cout << "ÇëÊäÈëÄãÒª²éÑ¯µÄ¹Ë¿ÍµÄĞÕÃû" << endl;
+		cout << "è¯·è¾“å…¥ä½ è¦æŸ¥è¯¢çš„é¡¾å®¢çš„å§“å" << endl;
 		cin >> name;
 		cout.setf(ios::left);
-		cout << setw(15) << "ĞÕÃû" << setw(15) << "µç»°ºÅÂë" << setw(15) << "ÀñÆ·Ãû³Æ"
-			<< setw(15) << "ÀñÆ·±àºÅ" << setw(15) << "ÀñÆ·³É±¾" << setw(15) << "ÀñÆ·ÊÛ¼Û" 
-			<< setw(15) << "Êµ¼ÊÊÛ¼Û" << setw(15) << "¹ºÂòÊıÁ¿" << setw(15) << "¹ºÂòÈÕÆÚ" << endl;
+		cout << setw(15) << "å§“å" << setw(15) << "ç”µè¯å·ç " << setw(15) << "ç¤¼å“åç§°"
+			<< setw(15) << "ç¤¼å“ç¼–å·" << setw(15) << "ç¤¼å“æˆæœ¬" << setw(15) << "ç¤¼å“å”®ä»·" 
+			<< setw(15) << "å®é™…å”®ä»·" << setw(15) << "è´­ä¹°æ•°é‡" << setw(15) << "è´­ä¹°æ—¥æœŸ" << endl;
 		for (int i = 0; i < saleRecords.size(); i++)
 			if (saleRecords[i].getName() == name)
 			{
@@ -708,12 +708,12 @@ void GiftManage::querySaleRecords()//²éÑ¯ÏúÊÛ¼ÇÂ¼
 		cout.unsetf(ios::left);
 		break;
 	case 2:
-		cout << "ÇëÊäÈëÄãÒª²éÑ¯µÄ¹Ë¿ÍµÄÊÖ»úºÅÂë" << endl;
+		cout << "è¯·è¾“å…¥ä½ è¦æŸ¥è¯¢çš„é¡¾å®¢çš„æ‰‹æœºå·ç " << endl;
 		cin >> phone;
 		cout.setf(ios::left);
-		cout << setw(15) << "ĞÕÃû" << setw(15) << "µç»°ºÅÂë" << setw(15) << "ÀñÆ·Ãû³Æ"
-			<< setw(15) << "ÀñÆ·±àºÅ" << setw(15) << "ÀñÆ·³É±¾" << setw(15) << "ÀñÆ·ÊÛ¼Û"
-			<< setw(15) << "Êµ¼ÊÊÛ¼Û" << setw(15) << "¹ºÂòÊıÁ¿" << setw(15) << "¹ºÂòÈÕÆÚ" << endl;
+		cout << setw(15) << "å§“å" << setw(15) << "ç”µè¯å·ç " << setw(15) << "ç¤¼å“åç§°"
+			<< setw(15) << "ç¤¼å“ç¼–å·" << setw(15) << "ç¤¼å“æˆæœ¬" << setw(15) << "ç¤¼å“å”®ä»·"
+			<< setw(15) << "å®é™…å”®ä»·" << setw(15) << "è´­ä¹°æ•°é‡" << setw(15) << "è´­ä¹°æ—¥æœŸ" << endl;
 		for (int i = 0; i < saleRecords.size(); i++)
 			if (saleRecords[i].getPhone() == phone)
 			{
@@ -723,12 +723,12 @@ void GiftManage::querySaleRecords()//²éÑ¯ÏúÊÛ¼ÇÂ¼
 		cout.unsetf(ios::left);
 		break;
 	case 3:
-		cout << "ÇëÊäÈëÄãÒª²éÑ¯µÄÀñÆ·±àºÅ" << endl;
+		cout << "è¯·è¾“å…¥ä½ è¦æŸ¥è¯¢çš„ç¤¼å“ç¼–å·" << endl;
 		cin >> number;
 		cout.setf(ios::left);
-		cout << setw(15) << "ĞÕÃû" << setw(15) << "µç»°ºÅÂë" << setw(15) << "ÀñÆ·Ãû³Æ"
-			<< setw(15) << "ÀñÆ·±àºÅ" << setw(15) << "ÀñÆ·³É±¾" << setw(15) << "ÀñÆ·ÊÛ¼Û"
-			<< setw(15) << "Êµ¼ÊÊÛ¼Û" << setw(15) << "¹ºÂòÊıÁ¿" << setw(15) << "¹ºÂòÈÕÆÚ" << endl;
+		cout << setw(15) << "å§“å" << setw(15) << "ç”µè¯å·ç " << setw(15) << "ç¤¼å“åç§°"
+			<< setw(15) << "ç¤¼å“ç¼–å·" << setw(15) << "ç¤¼å“æˆæœ¬" << setw(15) << "ç¤¼å“å”®ä»·"
+			<< setw(15) << "å®é™…å”®ä»·" << setw(15) << "è´­ä¹°æ•°é‡" << setw(15) << "è´­ä¹°æ—¥æœŸ" << endl;
 		for (int i = 0; i < saleRecords.size(); i++)
 			if (saleRecords[i].getNumber() == number)
 			{
@@ -738,12 +738,12 @@ void GiftManage::querySaleRecords()//²éÑ¯ÏúÊÛ¼ÇÂ¼
 		cout.unsetf(ios::left);
 		break;
 	case 4:
-		cout << "ÇëÊäÈëÄãÒª²éÑ¯µÄÀñÆ·Ãû³Æ" << endl;
+		cout << "è¯·è¾“å…¥ä½ è¦æŸ¥è¯¢çš„ç¤¼å“åç§°" << endl;
 		cin >> giftName;
 		cout.setf(ios::left);
-		cout << setw(15) << "ĞÕÃû" << setw(15) << "µç»°ºÅÂë" << setw(15) << "ÀñÆ·Ãû³Æ"
-			<< setw(15) << "ÀñÆ·±àºÅ" << setw(15) << "ÀñÆ·³É±¾" << setw(15) << "ÀñÆ·ÊÛ¼Û"
-			<< setw(15) << "Êµ¼ÊÊÛ¼Û" << setw(15) << "¹ºÂòÊıÁ¿" << setw(15) << "¹ºÂòÈÕÆÚ" << endl;
+		cout << setw(15) << "å§“å" << setw(15) << "ç”µè¯å·ç " << setw(15) << "ç¤¼å“åç§°"
+			<< setw(15) << "ç¤¼å“ç¼–å·" << setw(15) << "ç¤¼å“æˆæœ¬" << setw(15) << "ç¤¼å“å”®ä»·"
+			<< setw(15) << "å®é™…å”®ä»·" << setw(15) << "è´­ä¹°æ•°é‡" << setw(15) << "è´­ä¹°æ—¥æœŸ" << endl;
 		for (int i = 0; i < saleRecords.size(); i++)
 			if (saleRecords[i].getGiftName() == giftName)
 			{
@@ -758,7 +758,7 @@ void GiftManage::querySaleRecords()//²éÑ¯ÏúÊÛ¼ÇÂ¼
 
 	if (!num)
 	{
-		cout << "ÏúÊÛ¼ÇÂ¼²»´æÔÚ" << endl;
+		cout << "é”€å”®è®°å½•ä¸å­˜åœ¨" << endl;
 	}
 }
 
@@ -771,6 +771,6 @@ void GiftManage::totalProfit()
 		total += (saleRecords[i].getActualPrice() - saleRecords[i].getCost()) * saleRecords[i].getAmount();
 	}
 
-	//Êä³öÁ½Î»Ğ¡Êı
-	cout << "×ÜÀûÈóÎª£º" << setiosflags(ios::fixed) << setprecision(2) << total << endl;
+	//è¾“å‡ºä¸¤ä½å°æ•°
+	cout << "æ€»åˆ©æ¶¦ä¸ºï¼š" << setiosflags(ios::fixed) << setprecision(2) << total << endl;
 }
