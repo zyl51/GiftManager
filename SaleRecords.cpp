@@ -26,7 +26,7 @@ SaleRecords::~SaleRecords()
 }
 
 ostream& operator << (ostream& os, const SaleRecords& t)
-{//Êä³öÄ³ÌõÏúÊÛ¼ÇÂ¼
+{//è¾“å‡ºæŸæ¡é”€å”®è®°å½•
 	os.setf(ios::left);
 	os << setw(15) << t.name << setw(15) << t.phone << setw(15) << t.giftName << setw(15) << t.number <<
 		setw(15) << setiosflags(ios::fixed) << setprecision(2) << t.cost << setw(15) << t.price << setw(15)
@@ -36,7 +36,7 @@ ostream& operator << (ostream& os, const SaleRecords& t)
 }
 
 string SaleRecords::getName()
-{//»ñÈ¡¹Ë¿ÍµÄÐÕÃû
+{//èŽ·å–é¡¾å®¢çš„å§“å
 	return name;
 }
 
@@ -63,6 +63,11 @@ string SaleRecords::getGiftName()
 string SaleRecords::getNumber()
 {
 	return number;
+}
+
+double SaleRecords::getCost()
+{
+	return cost;
 }
 
 double SaleRecords::getPrice()
